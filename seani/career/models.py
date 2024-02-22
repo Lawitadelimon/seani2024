@@ -23,6 +23,6 @@ class Career(models.Model):
     def __str__(self):
         return f"{ self.level } - { self.short_name }"
     
-    class Meta:
-        verbose_name = 'carrera',
-        verbose_name_plural = 'carreras',
+    class Meta: 
+        verbose_name = 'carrera'
+    verbose_name_plural = 'carreras'
