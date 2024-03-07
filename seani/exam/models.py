@@ -115,7 +115,6 @@ class ExamModule(models.Model):
                 verbose_name = "Activo",
                 default = True
                 )
-
     score = models.FloatField(
                 verbose_name = "Calificacion",
                 default = 0.0
