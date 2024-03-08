@@ -135,6 +135,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL ='/media/'
 MEDIA_ROOT = BASE_DIR /'media'
 
+LOGIN_REDIRECT_URL = '/media/'
+LOGOUT_REDIRECT_URL = '/'
+
+
 cloudinary.config( 
     cloud_name = str(os.environ.get('CLOUD_NAME')), 
     api_key = str(os.environ.get('API_KEY')), 
