@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 
-from .models import Exam
+from .models import Exam, ExamModule
 from .forms import CandidateForm
 from django.contrib.auth.decorators import login_required 
 # Create your views here.
@@ -17,6 +17,8 @@ def home(request):
 @login_required
 def question(request, m_id, q_id = 1 ):
     exam = request.user.exam
+    if  exam.exammodule_set.filter(module_id=m_id).count() == 0  or q_id <= 0:
+        return redirect('exam:home')
     if request.method == 'POST':
         answer = request.POST['answer']
         questions = exam.breakdown_set.filter(question__module_id=m_id)
@@ -36,7 +38,12 @@ def question(request, m_id, q_id = 1 ):
             'm_id': m_id,
             'q_id': q_id,
             })
+
+        
+    
     except IndexError:
+        exam.compute_score_by_module(m_id)
+        exam.compute_score()
         return redirect('exam:home')
 
 @login_required

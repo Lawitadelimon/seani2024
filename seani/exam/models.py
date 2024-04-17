@@ -104,7 +104,7 @@ class Exam(models.Model):
         for question in self.breakdown_set.filter(question__module_id=m_id):
             if question.answer == question.correct:
                 score += 10
-        module = self.example.exammodule_set.get(module_id=m_id)
+        module = self.exammodule_set.get(module_id=m_id)
         module.score = score / self.questions.filter(module_id=m_id).count()
         module.save()
     
